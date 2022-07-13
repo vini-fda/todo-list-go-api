@@ -27,5 +27,5 @@ func init() {
 	if err != nil {
 		panic("failed to connect database")
 	}
-	fmt.Println("Database connection successfully opened!!!!")
+	fmt.Println("Database connection successfully opened.")
 }

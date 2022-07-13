@@ -18,7 +18,6 @@ func setupRoutes(app *fiber.App) {
 
 func main() {
 	app := fiber.New()
-	fmt.Println("Database connection WHAT opened!!!!")
 	if err := database.DBConn.AutoMigrate(&todo.Todo{}); err != nil {
 		panic("Could not properly migrate schema.")
 	}
