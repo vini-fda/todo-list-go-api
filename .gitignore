@@ -1,0 +1,5 @@
+# Environment file created by setup-env.sh
+.env
+
+# Local database files
+*.db
