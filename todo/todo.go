@@ -2,6 +2,7 @@ package todo
 
 import (
 	"github.com/gofiber/fiber/v2"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/vini-fda/todo-list-go-api/database"
 	"gorm.io/gorm"
 )

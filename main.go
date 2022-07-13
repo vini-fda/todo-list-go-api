@@ -2,24 +2,12 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/vini-fda/todo-list-go-api/database"
 	"github.com/vini-fda/todo-list-go-api/todo"
-	"gorm.io/driver/sqlite"
-	"gorm.io/gorm"
 )
-
-func initDatabase() {
-	var err error
-	database.DBConn, err = gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
-	if err != nil {
-		panic("failed to connect database")
-	}
-	fmt.Println("Database connection successfully opened")
-	database.DBConn.AutoMigrate(&todo.Todo{})
-	fmt.Println("Database migrated")
-}
 
 func setupRoutes(app *fiber.App) {
 	app.Get("/api/v1/todo", todo.GetTodos)
@@ -30,9 +18,14 @@ func setupRoutes(app *fiber.App) {
 
 func main() {
 	app := fiber.New()
-
-	initDatabase()
+	fmt.Println("Database connection WHAT opened!!!!")
+	if err := database.DBConn.AutoMigrate(&todo.Todo{}); err != nil {
+		panic("Could not properly migrate schema.")
+	}
+	fmt.Println("Database migration completed.")
 
 	setupRoutes(app)
-	app.Listen(":3000")
+	if err := app.Listen(os.Getenv("API_PORT")); err != nil {
+		panic("Could not establish a listening connection.")
+	}
 }
