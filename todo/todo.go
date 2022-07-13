@@ -12,7 +12,7 @@ type Todo struct {
 	Title       string `json:"title"`
 	Description string `json:"description"`
 	Priority    uint8  `json:"priority"`
-	Checked     bool   `json:"bool"`
+	Checked     bool   `json:"checked"`
 }
 
 func GetTodos(c *fiber.Ctx) error {
