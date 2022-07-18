@@ -41,6 +41,21 @@ func NewTodo(c *fiber.Ctx) error {
 	return c.JSON(todo)
 }
 
+func UpdateTodo(c *fiber.Ctx) error {
+	id := c.Params("id")
+	db := database.DBConn
+	var todo Todo
+	db.First(&todo, id)
+	if todo.Title == "" {
+		return c.Status(500).SendString("No 'Todo' found with given ID")
+	}
+	if err := c.BodyParser(&todo); err != nil {
+		return c.Status(503).SendString(err.Error())
+	}
+	db.Save(&todo)
+	return c.JSON(todo)
+}
+
 func DeleteTodo(c *fiber.Ctx) error {
 	id := c.Params("id")
 	db := database.DBConn
