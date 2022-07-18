@@ -4,7 +4,7 @@ A simple CRUD API built with Go's [Fiber](https://github.com/gofiber/fiber) and 
 
 ## Features
 
-1. Simple CRUD functionality (Create, Read, Delete, but not Update yet)
+1. Simple CRUD functionality (Create, Read, Update and Delete)
 2. Every `todo` has the following format:
 ```json
 {
